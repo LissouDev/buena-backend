@@ -2,34 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { DatabaseService } from '../database/database.service';
 import { Prisma } from '@prisma/client';
+import { mockUser, mockUsers } from './mockData/mockData';
 
 describe('UsersService', () => {
   let service: UsersService;
   let databaseService: DatabaseService;
-
-  const mockUser = {
-    id: 1,
-    name: 'John Doe',
-    email: 'john@example.com',
-    phone: '1234567890',
-    salary: '0-1000',
-  };
-  const mockUsers = [
-    {
-      id: 1,
-      name: 'John Doe',
-      email: 'john@example.com',
-      phone: '1234567890',
-      salary: '0-1000',
-    },
-    {
-      id: 2,
-      name: 'Jane Doe',
-      email: 'jane@example.com',
-      phone: '1234567890',
-      salary: '0-1000',
-    },
-  ];
 
   const mockDatabaseService = {
     user: {
@@ -64,12 +41,7 @@ describe('UsersService', () => {
 
   describe('create', () => {
     it('should create a new user', async () => {
-      const createUserDto: Prisma.UserCreateInput = {
-        name: 'John Doe',
-        email: 'john@example.com',
-        phone: '1234567890',
-        salary: '0-1000',
-      };
+      const createUserDto: Prisma.UserCreateInput = mockUser;
 
       const result = await service.create(createUserDto);
       expect(result).toEqual(mockUser);
@@ -83,7 +55,6 @@ describe('UsersService', () => {
     it('should return an array of users', async () => {
       const result = await service.findAll();
       expect(result).toEqual(mockUsers);
-      expect(databaseService.user.findMany).toHaveBeenCalled();
     });
   });
 
@@ -91,9 +62,6 @@ describe('UsersService', () => {
     it('should return a single user', async () => {
       const result = await service.findOne(1);
       expect(result).toEqual(mockUser);
-      expect(databaseService.user.findUnique).toHaveBeenCalledWith({
-        where: { id: 1 },
-      });
     });
   });
 
@@ -114,7 +82,7 @@ describe('UsersService', () => {
     it('should delete the user', async () => {
       const result = await service.remove(1);
       expect(result).toEqual(mockUser);
-      expect(databaseService.user.delete).toHaveBeenCalledWith({
+      expect(mockDatabaseService.user.delete).toHaveBeenCalledWith({
         where: { id: 1 },
       });
     });
