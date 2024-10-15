@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from '../database/database.service';
-import { mockUser, mockUsers } from './mockData/mockData';
 
 @Injectable()
 export class UsersService {
@@ -12,15 +11,11 @@ export class UsersService {
   }
 
   async findAll() {
-    // TODO uncomment to use the database
-    // return this.databaseService.user.findMany();
-    return mockUsers;
+    return this.databaseService.user.findMany();
   }
 
   async findOne(id: number) {
-    // TODO uncomment to use the database
-    // return this.databaseService.user.findUnique({ where: { id } });
-    return mockUser;
+    return this.databaseService.user.findUnique({ where: { id } });
   }
 
   async update(id: number, updateUserDto: Prisma.UserUpdateInput) {

@@ -9,10 +9,13 @@ The main technology is:
 
 ## Run the backend separatly from the frontend
 
+The backend is hosted on AWS Amplify for demo purposes.
+
 It is possible to run the backend separatly from the frontend by following the next steps.
 
 ```bash
 $ npm install
+$ npm run build
 $ npm run start
 ```
 Example of request for test: GET http://localhost:4000/api/users
