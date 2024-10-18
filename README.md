@@ -7,9 +7,7 @@ The main technology is:
 - [Neon Postgres Database](https://console.neon.tech/)
 - [Prisma](https://www.prisma.io/)
 
-## Run the backend separatly from the frontend
-
-The backend is hosted on AWS Amplify for demo purposes.
+## Local setup
 
 It is possible to run the backend separatly from the frontend by following the next steps.
 
@@ -27,3 +25,7 @@ To run the tests, run the following command in the frontend or backend folder:
 ```bash
 $ npm run test
 ```
+
+## Deployment 
+
+WIP - The backend is deployed on AWS Elastic Beanstalk.
